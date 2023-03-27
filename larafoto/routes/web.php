@@ -19,3 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/config', 'UserController@config')->name('config');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::post('/user/update', 'UserController@update')->name('user.update');
+
+// Images
+Route::get('/images/create', 'ImageController@create')->name('image.create');
+Route::post('/images/save', 'ImageController@save')->name('image.save');

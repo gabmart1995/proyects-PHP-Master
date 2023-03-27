@@ -5,11 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                @if (session('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                    </div>
-                @endif
+                @include('includes.message')
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Configuración de la cuenta</div>
@@ -76,7 +72,7 @@
 
                             
                             
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
 
                                 <label for="image_path" class="col-md-4 control-label">Avatar</label>
 

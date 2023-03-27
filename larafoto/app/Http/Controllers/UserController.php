@@ -9,6 +9,10 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
+    function __construct() {
+        $this->middleware('auth');
+    }
+    
     function config() {
         return view('user.config');
     }
@@ -65,6 +69,7 @@ class UserController extends Controller
 
     function getImage($fileName) {
         $file = Storage::disk('users')->get($fileName);
+        
         return new Response($file, 200);
     }
 }

@@ -1,4 +1,20 @@
-.avatar {
+form .avatar {
     width: 55px;
     margin-bottom: 15px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.navbar .container-avatar img {
+    width: 100%;
 }
