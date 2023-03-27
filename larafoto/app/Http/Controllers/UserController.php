@@ -27,7 +27,7 @@ class UserController extends Controller
         ];
 
         // validate form
-        $validate = $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$values['id'],
             'surname' => 'required|string|max:255',
@@ -54,7 +54,7 @@ class UserController extends Controller
         // execute query
         $user->update();
 
-        // create message flash
+        // redirect with message flash
         return redirect()
             ->route('config')
             ->with([
