@@ -1,1 +1,13 @@
 shirts-shop/uploads
+larafoto/node_modules
+larafoto/public/hot
+larafoto/public/storage
+larafoto/storage/*.key
+larafoto/vendor
+larafoto/.idea
+larafoto/.vagrant
+larafoto/Homestead.json
+larafoto/Homestead.yaml
+larafoto/npm-debug.log
+larafoto/yarn-error.log
+larafoto/.env
