@@ -63,6 +63,20 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        // creamos los disco virtual del usuario
+        'users' => [
+            'driver' => 'local',
+            'root' => storage_path('app/users'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/images'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
     ],
 
 ];
