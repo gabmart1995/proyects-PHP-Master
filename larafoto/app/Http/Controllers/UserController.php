@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -60,5 +61,10 @@ class UserController extends Controller
             ->with([
                 'message' => 'Usuario actualizado correctamente',
             ]);
+    }
+
+    function getImage($fileName) {
+        $file = Storage::disk('users')->get($fileName);
+        return new Response($file, 200);
     }
 }

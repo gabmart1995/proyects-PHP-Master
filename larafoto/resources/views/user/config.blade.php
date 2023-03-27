@@ -74,10 +74,15 @@
                                 </div>
                             </div>
 
+                            
+                            
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="image_path" class="col-md-4 control-label">Imagen</label>
+
+                                <label for="image_path" class="col-md-4 control-label">Avatar</label>
 
                                 <div class="col-md-6">
+                                    @include('includes.avatar')
+
                                     <input 
                                         id="image_path" 
                                         type="file" 
