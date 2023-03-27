@@ -23,3 +23,4 @@ Route::post('/user/update', 'UserController@update')->name('user.update');
 // Images
 Route::get('/images/create', 'ImageController@create')->name('image.create');
 Route::post('/images/save', 'ImageController@save')->name('image.save');
+Route::get('images/file/{filename}', 'ImageController@getImage')->name('image.file');

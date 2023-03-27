@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Image;
@@ -22,7 +23,8 @@ class ImageController extends Controller
         
         $data = [
             'description' => $request->input('description'),
-            'image' => $request->file('image'), 
+            'image' => $request->file('image'),
+            'user_id' => (\Auth::user())->id, 
         ];
 
         $this->validate($request, [
@@ -30,27 +32,27 @@ class ImageController extends Controller
             'image' => 'required|image',
         ]);
 
-        $user = \Auth::user();
-
+        // upload files
+        $imagePathName = time().($data['image'])->getClientOriginalName();
+        Storage::disk('images')->put($imagePathName, File::get($data['image']));    
+        
         // assign
         $imageModel = new Image();
         $imageModel->image_path = null;
         $imageModel->description = $data['description'];
-        $imageModel->user_id = $user->id;
-
-        // upload files
-        if ($data['image']) {
-            $imagePathName = time().($data['image'])->getClientOriginalName();
-
-            Storage::disk('images')->put($imagePathName, File::get($data['image']));    
-            
-            $imageModel->image_path = $imagePathName;
-        }
+        $imageModel->user_id = $data['user_id'];
+        $imageModel->image_path = $imagePathName;
 
         $imageModel->save();
 
         return redirect()
             ->route('home')
             ->with(['message' => 'La foto ha sido subida correctamente']);
+    }
+
+    function getImage($fileName) {
+        $file = Storage::disk('images')->get($fileName);
+
+        return new Response($file, 200);
     }
 }
