@@ -23,7 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $images = Image::orderBy('id', 'DESC')->get();
+        $images = Image::orderBy('id', 'DESC')->paginate(5);
 
         return view('home', ['images' => $images]);
     }

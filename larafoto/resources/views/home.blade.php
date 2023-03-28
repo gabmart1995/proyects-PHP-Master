@@ -22,8 +22,10 @@
                             class="data-user" 
                             style="{{ $image->user->image ? 'margin-left: 15px' : '' }}"
                         >
-                            {{ $image->user->name.' '.$image->user->surname }}
-                            <span class="nickname">{{ ' | @'.$image->user->nick }}</span>    
+                            <a href="{{ route('image.detail', ['id' => $image->id]) }}">
+                                {{ $image->user->name.' '.$image->user->surname }}
+                                <span class="nickname">{{ ' | @'.$image->user->nick }}</span>    
+                            </a>
                         </div>
                     </div>
 
@@ -33,17 +35,25 @@
                                 src="{{ route('image.file', ['filename' => $image->image_path]) }}" 
                             />
                         </div>
-                        <div class="likes">
-
-                        </div>
                         <div class="description">
-                            <span class="nickname">{{ '@'.$image->user->nick }}</span> <br />
+                            <span class="nickname">{{ '@'.$image->user->nick }}</span> 
+                            <span class="date">{{ ' | '.\FormatTime::LongTimeFilter($image->created_at) }}</span> <br />
                             <p>{{ $image->description }}</p>
+                        </div>
+                        <div class="likes">
+                            <img src="{{ asset('img/heart-black.gif') }}" />
+                        </div>
+                        <div class="comments">
+                            <a href="" class="btn btn-warning btn-comments btn-sm">
+                                Comentarios ({{ count($image->comments) }})
+                            </a>
                         </div>
                     </div>
                 </div>
             @endforeach
-
+            <!-- paginacion -->
+            <div class="clearfix"></div>
+            {{ $images->links() }}
         </div>
     </div>
 </div>
