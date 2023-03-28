@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default pub_image">
+            @include('includes.message')
+            
+            <div class="panel panel-default pub_image pub_image_detail">
                 <div class="panel-heading">
                     @if ($image->user->image)
                         <div class="container-avatar">
@@ -25,22 +27,56 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="image-container">
+                    <div class="image-container image-detail">
                         <img 
                             src="{{ route('image.file', ['filename' => $image->image_path]) }}" 
                         />
                     </div>
                     <div class="description">
-                        <span class="nickname">{{ '@'.$image->user->nick }}</span> <br />
+                        <span class="nickname">{{ '@'.$image->user->nick }}</span> 
+                        <span class="date">{{ ' | '.\FormatTime::LongTimeFilter($image->created_at) }}</span> <br />
                         <p>{{ $image->description }}</p>
                     </div>
                     <div class="likes">
                         <img src="{{ asset('img/heart-black.gif') }}" />
                     </div>
+                    <div class="clearfix"></div>
                     <div class="comments">
-                        <a href="" class="btn btn-warning btn-comments btn-sm">
-                            Comentarios ({{ count($image->comments) }})
-                        </a>
+                        <h2>Comentarios {{ count($image->comments) }}</h2>
+                        <hr /> 
+                        
+                        <form action="{{ route('comment.store') }}" method="POST">
+                            {{ csrf_field() }}
+                            
+                            <input type="hidden" name="image_id" value="{{ $image->id }}" />
+
+                            <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                                <textarea class="form-control" name="content" ></textarea>
+                                @if ($errors->has('content'))
+                                    <span class="help-block text-red">{{ $errors->first('content') }}</span>
+                                @endif
+                            </div>
+                            <button class="btn btn-success" type="submit">Enviar</button>
+                        </form>
+                        <hr />
+                        <!-- comments -->
+                        @foreach ($image->comments as $comment)
+                            <div class="comment">
+                                <span class="nickname">{{ '@'.$comment->user->nick }}</span> 
+                                <span class="date">{{ ' | '.\FormatTime::LongTimeFilter($comment->created_at) }}</span> <br />
+                                <p>
+                                    {{ $comment->content }}<br />
+                                    
+                                    <!-- chequea si es el usuario que creo el comentario -->
+                                    @if (\Auth::check() && ($comment->user_id == \Auth::user()->id || $comment->image->user_id == \Auth::user()->id))
+                                        <a class="btn btn-danger btn-sm"  href="{{ route('comment.delete', ['id' => $comment->id]) }}">
+                                            Eliminar
+                                        </a>
+                                    @endif
+                                </p>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
