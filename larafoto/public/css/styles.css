@@ -88,3 +88,21 @@ form .avatar {
     color: gray;
     font-size: 11px;
 }
+
+.profile-user {
+    display: grid;
+    grid-template-columns: repeat(2, 33.3% calc(100% - 33.3%));
+    margin-bottom: 40px;
+}
+
+.profile-user .container-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-user .container-avatar img {
+    width: 100%;
+    height: 100%;
+}
