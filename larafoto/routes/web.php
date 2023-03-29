@@ -12,7 +12,6 @@
 */
 
 Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
 
 // config
@@ -20,6 +19,7 @@ Route::get('/config', 'UserController@config')->name('config');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::post('/user/update', 'UserController@update')->name('user.update');
 Route::get('/profile/{id}', 'UserController@profile')->name('user.profile');
+Route::get('/people/{search?}', 'UserController@index')->name('user.index');
 
 // Images
 Route::get('/images/create', 'ImageController@create')->name('image.create');

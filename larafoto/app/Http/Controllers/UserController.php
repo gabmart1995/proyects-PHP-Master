@@ -14,6 +14,24 @@ class UserController extends Controller
     function __construct() {
         $this->middleware('auth');
     }
+
+    function index($search = null) {
+
+        if (!empty($search)) {
+            $users = User::where('nick', 'LIKE', ('%'.$search.'%'))
+                ->orWhere('name', 'LIKE', ('%'.$search.'%'))
+                ->orWhere('surname', 'LIKE', ('%'.$search.'%'))
+                ->orderBy('id', 'DESC')
+                ->paginate(5);    
+            
+            
+            return view('user.index', ['users' => $users]);
+        } 
+        
+        $users = User::orderBy('id', 'DESC')->paginate(5);
+
+        return view('user.index', ['users' => $users]);
+    }
     
     function config() {
         return view('user.config');

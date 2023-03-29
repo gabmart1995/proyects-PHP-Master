@@ -81,4 +81,9 @@ jQuery(document).on('DOMContentLoaded', function () {
     // ejecutamos los eventos
     like();
     dislike();
+
+    // buscador
+    $('#search-form').on('submit', function (event) {
+        $(this).attr('action', (url + 'people/' + $('#search').val()));
+    })
 });

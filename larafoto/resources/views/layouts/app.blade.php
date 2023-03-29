@@ -48,6 +48,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li><a href="{{ route('home') }}">Inicio</a></li>
+                            <li><a href="{{ route('user.index') }}">Personas</a></li>
                             <li><a href="{{ route('like.index') }}">favoritas</a></li>
                             <li><a href="{{ route('image.create') }}">Subir imagen</a></li>
                             <li>@include('includes.avatar')</li>
