@@ -57,7 +57,16 @@
                         @endif
                         <span class="number_likes">{{ count($image->likes) }}</span>
                     </div>
+                    
+                    @if (\Auth::user() && (\Auth::user())->id == $image->user->id)
+                        <div class="actions">
+                            <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-danger btn-sm">Borrar</a>
+                            <a href="" class="btn btn-primary btn-sm">Editar</a>
+                        </div>
+                    @endif
+
                     <div class="clearfix"></div>
+
                     <div class="comments">
                         <h2>Comentarios {{ count($image->comments) }}</h2>
                         <hr /> 
