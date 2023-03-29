@@ -19,6 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/config', 'UserController@config')->name('config');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::post('/user/update', 'UserController@update')->name('user.update');
+Route::get('/profile/{id}', 'UserController@profile')->name('user.profile');
 
 // Images
 Route::get('/images/create', 'ImageController@create')->name('image.create');
@@ -33,3 +34,4 @@ Route::get('/comments/delete/{id}', 'CommentController@delete')->name('comment.d
 // Likes Ajax
 Route::get('/like/{image_id}', 'LikeController@like')->name('like.save');
 Route::get('/dislike/{image_id}', 'LikeController@dislike')->name('like.dislike');
+Route::get('/likes', 'LikeController@index')->name('like.index');

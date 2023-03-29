@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 
+use App\User;
+
 class UserController extends Controller
 {
     function __construct() {
@@ -69,7 +71,11 @@ class UserController extends Controller
 
     function getImage($fileName) {
         $file = Storage::disk('users')->get($fileName);
-        
         return new Response($file, 200);
+    }
+
+    function profile($user_id) {
+        $user = User::find($user_id);
+        return view('user.profile', ['user' => $user]);
     }
 }

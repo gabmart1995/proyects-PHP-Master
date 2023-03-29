@@ -57,4 +57,14 @@ class LikeController extends Controller
             'message' => 'El like no existe',
         ]);
     }
+
+    function index() {
+        $likes = Like::where('user_id', (\Auth::user())->id)
+            ->orderBy('id', 'DESC')
+            ->paginate(5);
+
+        return view('like.index', [
+            'likes' => $likes,
+        ]);
+    }
 }

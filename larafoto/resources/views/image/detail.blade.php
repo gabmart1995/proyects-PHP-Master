@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             @include('includes.message')
-            
+        
             <div class="panel panel-default pub_image pub_image_detail">
                 <div class="panel-heading">
                     @if ($image->user->image)
