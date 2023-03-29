@@ -60,8 +60,34 @@
                     
                     @if (\Auth::user() && (\Auth::user())->id == $image->user->id)
                         <div class="actions">
-                            <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-danger btn-sm">Borrar</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete">
+                                Borrar
+                            </button>
                             <a href="" class="btn btn-primary btn-sm">Editar</a>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalDeleteHeader">Eliminar Publicación</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Si eliminas la imagen no podras recuperarla. ¿¿Estas seguro??
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-danger">
+                                            Aceptar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endif
 
