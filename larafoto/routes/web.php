@@ -29,3 +29,7 @@ Route::get('/images/detail/{id}', 'ImageController@detail')->name('image.detail'
 // Comments
 Route::post('/comments/store', 'CommentController@store')->name('comment.store');
 Route::get('/comments/delete/{id}', 'CommentController@delete')->name('comment.delete');
+
+// Likes Ajax
+Route::get('/like/{image_id}', 'LikeController@like')->name('like.save');
+Route::get('/dislike/{image_id}', 'LikeController@dislike')->name('like.dislike');
