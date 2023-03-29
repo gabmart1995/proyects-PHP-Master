@@ -45,7 +45,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('register') }}">Registro</a></li>
                         @else
                             <li><a href="{{ route('home') }}">Inicio</a></li>
                             <li><a href="{{ route('user.index') }}">Personas</a></li>
