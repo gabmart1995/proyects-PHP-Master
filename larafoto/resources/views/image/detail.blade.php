@@ -64,7 +64,7 @@
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete">
                                 Borrar
                             </button>
-                            <a href="" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('image.edit', ['id' => $image->id]) }}" class="btn btn-primary btn-sm">Editar</a>
                         </div>
 
                         <!-- Modal -->

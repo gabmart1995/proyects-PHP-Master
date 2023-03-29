@@ -40,7 +40,6 @@ class ImageController extends Controller
         
         // assign
         $imageModel = new Image();
-        $imageModel->image_path = null;
         $imageModel->description = $data['description'];
         $imageModel->user_id = $data['user_id'];
         $imageModel->image_path = $imagePathName;
@@ -100,5 +99,47 @@ class ImageController extends Controller
         return redirect()
             ->route('home')
             ->with($message);
+    }
+
+    function edit($id) {
+        $user = \Auth::user();
+        $image = Image::find($id);
+
+        if (($user && $image) && $image->user->id == $user->id) {
+            return view('image.edit', ['image' => $image]);
+        }
+
+        return redirect()->route('home');
+    }
+
+    function update(Request $request) {
+        $data = [
+            'image_id' => $request->input('image_id'),
+            'description' => $request->input('description'),
+            'image' => $request->file('image'),
+        ];
+
+        $this->validate($request, [
+            'description' => 'required',
+            'image' => 'image',
+        ]);
+        
+        // assign
+        $imageModel = Image::find($data['image_id']);
+        $imageModel->description = $data['description'];
+
+        // upload files
+        if ($data['image']) {    
+            $imagePathName = time().($data['image'])->getClientOriginalName();
+            Storage::disk('images')->put($imagePathName, File::get($data['image']));  
+            
+            $imageModel->image_path = $imagePathName;
+        }
+
+        $imageModel->update();
+
+        return redirect()
+            ->route('image.detail', ['id' => $data['image_id']])
+            ->with(['message' => 'Imagen actualizada con éxito' ]);
     }
 }
